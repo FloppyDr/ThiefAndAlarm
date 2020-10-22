@@ -21,7 +21,7 @@ public class Siren : MonoBehaviour
         {
             for (int i = 0; i < steps; i++)
             {
-                _audio.volume +=0.05f;
+                _audio.volume = Mathf.Lerp(_audio.volume,1,i*Time.deltaTime);
                 yield return delay;
             }
 
@@ -30,9 +30,9 @@ public class Siren : MonoBehaviour
         }
         else if (_audio.volume == 1)
         {
-            for (int i = steps; i > 0; i--)
+            for (int i = 0; i < steps; i++)
             {
-                _audio.volume -= 0.05f;
+                _audio.volume = Mathf.Lerp(_audio.volume, 0, i * Time.deltaTime);
                 yield return delay;
             }
 
