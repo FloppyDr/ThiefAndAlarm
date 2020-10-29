@@ -6,24 +6,32 @@ using UnityEngine.Events;
 public class Siren : MonoBehaviour
 {
     [SerializeField] private AudioSource _audio;
-    private int minVolume = 0;
-    private int maxVolume = 1;
+    private int _minVolume = 0;
+    private int _maxVolume = 1;
+    private Coroutine _curretCoroutine;
+
     public void TurnOffSiren()
     {
-        StopAllCoroutines();
-        StartCoroutine(ChangeVolume(minVolume));
+        if (_curretCoroutine != null)
+        {
+            StopCoroutine(_curretCoroutine);
+        }
+        _curretCoroutine = StartCoroutine(ChangeVolume(_minVolume));
     }
 
     public void TurnOnSiren()
     {
-        StopAllCoroutines();
-        StartCoroutine(ChangeVolume(maxVolume));
+        if (_curretCoroutine != null)
+        {
+            StopCoroutine(_curretCoroutine);
+        }
+        _curretCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
     }
 
     private IEnumerator ChangeVolume(int targetVolume)
     {
         var delay = new WaitForSeconds(0.005f);
-        while (true)
+        while (_audio.volume != targetVolume)
         {
             _audio.volume = Mathf.MoveTowards(_audio.volume, targetVolume, Time.deltaTime);
             yield return delay;

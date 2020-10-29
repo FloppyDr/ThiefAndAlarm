@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class Thief : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    [SerializeField]private float speed = 2;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _speed = 2;
+    private Rigidbody2D _rigidbody2D;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetAxis("Horizontal")>0)
+        if (Input.GetAxis("Horizontal") > 0)
         {
-            rb.AddForce(Vector2.right* speed);
+            _rigidbody2D.AddForce(Vector2.right * _speed);
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
-            rb.AddForce(Vector2.left* speed);
+            _rigidbody2D.AddForce(Vector2.left * _speed);
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            rb.AddForce(Vector2.up* speed);
+            _rigidbody2D.AddForce(Vector2.up * _speed);
         }
         if (Input.GetAxis("Vertical") < 0)
         {
-            rb.AddForce(Vector2.down* speed);
+            _rigidbody2D.AddForce(Vector2.down * _speed);
         }
     }
 }
