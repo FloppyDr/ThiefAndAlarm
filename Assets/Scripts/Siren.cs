@@ -30,11 +30,10 @@ public class Siren : MonoBehaviour
 
     private IEnumerator ChangeVolume(int targetVolume)
     {
-        var delay = new WaitForSeconds(0.005f);
         while (_audio.volume != targetVolume)
         {
             _audio.volume = Mathf.MoveTowards(_audio.volume, targetVolume, Time.deltaTime);
-            yield return delay;
+            yield return null;
         }
     }
 }
